@@ -82,6 +82,8 @@ new IdentityBuilder(typeof(RAppUser), typeof(RAppRole), builder.Services)
                 .AddSignInManager<SignInManager<RAppUser>>()
                 .AddEntityFrameworkStores<RDbContext>()
                 .AddErrorDescriber<PersianIdentityErrorDescriber>();
+/*
+//commented due to unknown problem:
 
 builder.Services.AddMvc(mvc =>
                    mvc.AddAuditFilter(config => config
@@ -90,7 +92,7 @@ builder.Services.AddMvc(mvc =>
                    .IncludeHeaders(ctx => !ctx.ModelState.IsValid)
                    .IncludeRequestBody()
                    .IncludeModelState()
-               ));
+               ));*/
 
 builder.Services.AddMemoryCache();
 
@@ -106,7 +108,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false,
         ValidAudience = "Everyone",
         ValidateIssuer = true,
-        ValidIssuer = "R Service",
+        ValidIssuer = builder.Configuration.GetSection("RSecurityBackend")["ApplicationName"],
 
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes($"{builder.Configuration.GetSection("Security")["Secret"]}")),
@@ -163,7 +165,7 @@ builder.Services.AddSwaggerGen(c =>
             Url = new Uri("https://github.com/hrmoh/RSecurityBackend")
         }
     }
-                    );
+    );
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
