@@ -82,17 +82,17 @@ new IdentityBuilder(typeof(RAppUser), typeof(RAppRole), builder.Services)
                 .AddSignInManager<SignInManager<RAppUser>>()
                 .AddEntityFrameworkStores<RDbContext>()
                 .AddErrorDescriber<PersianIdentityErrorDescriber>();
-/*
-//commented due to unknown problem:
-
-builder.Services.AddMvc(mvc =>
+if(bool.Parse(builder.Configuration["AuditNetEnabled"]))
+{
+    builder.Services.AddMvc(mvc =>
                    mvc.AddAuditFilter(config => config
                    .LogRequestIf(r => r.Method != "GET")
                    .WithEventType("{controller}/{action} ({verb})")
                    .IncludeHeaders(ctx => !ctx.ModelState.IsValid)
                    .IncludeRequestBody()
                    .IncludeModelState()
-               ));*/
+               ));
+}    
 
 builder.Services.AddMemoryCache();
 
