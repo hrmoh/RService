@@ -12,7 +12,7 @@ namespace RService.Services
     public class RoleService : RoleServiceBase
     {
         /// <summary>
-        /// gets list of SecurableItem, should be reimplemented in end user applications
+        /// gets list of SecurableItem, should be reimplemented in the end user applications
         /// </summary>
         /// <returns></returns>
         public override SecurableItem[] GetSecurableItems()

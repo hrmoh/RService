@@ -16,6 +16,7 @@ using RSecurityBackend.Services;
 using RSecurityBackend.Services.Implementation;
 using RSecurityBackend.Utilities;
 using RService.DbContext;
+using RService.Models.Auth.Memory;
 using RService.Services;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
@@ -141,7 +142,7 @@ builder.Services.AddAuthorization(options =>
     options.DefaultPolicy = defPolicy.Build();
 
 
-    foreach (SecurableItem Item in SecurableItem.Items)
+    foreach (SecurableItem Item in RSecurableItem.Items)
     {
         foreach (SecurableItemOperation Operation in Item.Operations)
         {
