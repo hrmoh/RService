@@ -17,7 +17,7 @@ using RSecurityBackend.Services.Implementation;
 using RSecurityBackend.Utilities;
 using RService.DbContext;
 using RService.Models.Auth.Memory;
-using RService.Services;
+using RService.Services.Implementation;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;

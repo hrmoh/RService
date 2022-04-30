@@ -4,7 +4,7 @@ using RSecurityBackend.Models.Auth.Memory;
 using RSecurityBackend.Services.Implementation;
 using RService.Models.Auth.Memory;
 
-namespace RService.Services
+namespace RService.Services.Implementation
 {
     /// <summary>
     /// Role Service Implementation
