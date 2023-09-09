@@ -236,6 +236,12 @@ builder.Services.AddTransient<ILongRunningJobProgressService, LongRunningJobProg
 //generic options service
 builder.Services.AddTransient<IRGenericOptionsService, RGenericOptionsServiceEF>();
 
+//workspace service
+builder.Services.AddTransient<IWorkspaceService, WorkspaceService>();
+
+//workspace role service
+builder.Services.AddTransient<IWorkspaceRolesService, WorkspaceRolesService>();
+
 //upload limit for IIS
 builder.Services.Configure<IISServerOptions>(options =>
 {
