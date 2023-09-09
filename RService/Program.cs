@@ -83,7 +83,7 @@ new IdentityBuilder(typeof(RAppUser), typeof(RAppRole), builder.Services)
                 .AddSignInManager<SignInManager<RAppUser>>()
                 .AddEntityFrameworkStores<RDbContext>()
                 .AddErrorDescriber<PersianIdentityErrorDescriber>();
-if(bool.Parse(builder.Configuration["AuditNetEnabled"]))
+if(bool.Parse(builder.Configuration["AuditNetEnabled"] ?? false.ToString()))
 {
     builder.Services.AddMvc(mvc =>
                    mvc.AddAuditFilter(config => config
@@ -239,7 +239,7 @@ builder.Services.AddTransient<IRGenericOptionsService, RGenericOptionsServiceEF>
 //upload limit for IIS
 builder.Services.Configure<IISServerOptions>(options =>
 {
-    options.MaxRequestBodySize = int.Parse(builder.Configuration.GetSection("IIS")["UploadLimit"]);
+    options.MaxRequestBodySize = int.Parse(builder.Configuration.GetSection("IIS")["UploadLimit"] ?? "52428800");
 });
 
 builder.Services.AddHostedService<QueuedHostedService>();

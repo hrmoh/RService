@@ -18,7 +18,7 @@ namespace RService.DbContext
             IConfigurationRoot configuration = new ConfigurationBuilder()
                    .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json")
                    .Build();
-            if (bool.Parse(configuration["DatabaseMigrate"]))
+            if (bool.Parse(configuration["DatabaseMigrate"] ?? true.ToString()))
             {
                 Database.Migrate();
             }
