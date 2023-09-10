@@ -20,5 +20,18 @@ namespace RService.Models.Auth.Memory
                 return lst.ToArray();
             }
         }
+
+        /// <summary>
+        /// workspace forms and their permissions
+        /// </summary>
+        public new static SecurableItem[] WorkspaceItems
+        {
+            get
+            {
+                List<SecurableItem> lst = new List<SecurableItem>(SecurableItem.WorkspaceItems);
+                //lst.AddRange(new permissions);
+                return lst.ToArray();
+            }
+        }
     }
 }
