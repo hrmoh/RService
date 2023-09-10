@@ -12,8 +12,8 @@ using RService.DbContext;
 namespace RService.Migrations
 {
     [DbContext(typeof(RDbContext))]
-    [Migration("20230909174600_Workspace")]
-    partial class Workspace
+    [Migration("20230910133815_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -494,7 +494,12 @@ namespace RService.Migrations
                     b.Property<string>("NormalizedName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("WorkspaceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WorkspaceId");
 
                     b.ToTable("RWSRoles");
                 });
@@ -831,6 +836,15 @@ namespace RService.Migrations
                     b.HasOne("RSecurityBackend.Models.Cloud.RWSRole", null)
                         .WithMany("Permissions")
                         .HasForeignKey("RWSRoleId");
+                });
+
+            modelBuilder.Entity("RSecurityBackend.Models.Cloud.RWSRole", b =>
+                {
+                    b.HasOne("RSecurityBackend.Models.Cloud.RWorkspace", "Workspace")
+                        .WithMany()
+                        .HasForeignKey("WorkspaceId");
+
+                    b.Navigation("Workspace");
                 });
 
             modelBuilder.Entity("RSecurityBackend.Models.Cloud.RWSUser", b =>
